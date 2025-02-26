@@ -1,4 +1,6 @@
 import sys
+from stats import get_num_words
+from stats import get_num_chars
 
 def main():
     if len(sys.argv) != 2:
@@ -13,22 +15,9 @@ def main():
     print_chars_report(convert_dict_to_list_with_only_alpha(num_chars))
     print(f"--- End report ---")
 
-def get_num_words(text):
-    words = text.split()
-    return len(words)
-
 def get_book_text(path):
     with open(path) as f:
         return f.read()
-
-def get_num_chars(text):
-    chars = {}
-    for c in text.lower():
-        if c in chars:
-            chars[c] = chars[c] + 1
-        else:
-           chars[c] = 1
-    return chars
 
 def convert_dict_to_list_with_only_alpha(dict):
     list = []
@@ -45,6 +34,6 @@ def print_chars_report(list):
     for dict in list:
         name = dict["name"]
         num = dict["num"]
-        print(f"the '{name}' character was found {num} times")
+        print(f"{name}: {num}")
 
 main()
